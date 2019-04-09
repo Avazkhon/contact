@@ -2,8 +2,21 @@
 	background-color: silver;
 }
 
-.cardArray {
-	margin: 0 auto;
+header {
+	position: fixed;
+	margin-top: -110px;
+	width: 100%;
+	z-index: 999;
+	background-color: white;
+}
+
+.carUsers{
+	margin: 110px auto;
+	width: 100%;
+}
+
+.cards {
+	margin-top: 100px;
 	width: 100%;
 }
 
