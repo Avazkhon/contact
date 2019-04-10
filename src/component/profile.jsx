@@ -1,21 +1,18 @@
 import React from 'react';
 
-function TextP(props) {
-  return(
-
-    <div className="col-md-6">
-        <p>{props.text}</p>
-    </div>
-  )
-}
-
+import Table from './table/Table'
 
 class  Profile extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      user: props.user
+      user: props.user,
+      tableId: "home" 
     }
+  }
+
+  handleTable(props) {
+    console.log(props)
   }
 
   // add content the future
@@ -35,12 +32,14 @@ class  Profile extends React.Component {
                     </div>
                     <div className="col-md-6">
                         <div className="profile-head">
-                                    <h5>
-                                      {this.state.user.name}
-                                    </h5>
+                            <h5>
+                              {this.state.user.name}
+                            </h5>
                             <ul className="nav nav-tabs" id="myTab" role="tablist">
                                 <li className="nav-item">
-                                    <a className="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
+
+                                    {/*add className active if active the future*/}
+                                    <button type="button" id="homeBtn" className="btn btn-light nav-link" onClick={this.handleTable.bind(this, "homeBtn")}>Светлый</button>
                                 </li>
                                 <li className="nav-item">
                                     <a className="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">line</a>
@@ -63,26 +62,10 @@ class  Profile extends React.Component {
                     </div>
                     <div className="col-md-8">
                         <div className="tab-content profile-tab" id="myTabContent">
-                            <div className="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                                <div className="row">
-                                <div className="col-md-6">
-                                        <label>User name</label>
-                                    </div>
-                                    <TextP text={this.state.user.name} />
-                                    <div className="col-md-6">
-                                        <label>User Id</label>
-                                    </div>
-                                    <TextP text={this.state.user.id} />
-                                    <div className="col-md-6">
-                                        <label>User phone</label>
-                                    </div>
-                                    <TextP text={this.state.user.phone} />
-                                    <div className="col-md-6">
-                                        <label>User email</label>
-                                    </div>
-                                    <TextP text={this.state.user.email} />
-                                </div>
-                            </div>
+
+                            {/*show dafault the className homeBtn*/}
+                            <Table user={this.state.user}/>
+
                             <div className="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                               <div className="row">
                                   <div className="col-md-6">
