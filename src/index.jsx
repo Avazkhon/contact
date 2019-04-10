@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import './css/style.css';
+import './css/profile.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import GetUser from './xhr/getUser';
@@ -29,6 +30,7 @@ class App extends React.Component{
     this.hundleGetCarts = this.hundleGetCarts.bind(this);
   }
 
+
   hundleGetUser () {
   	GetUser((users)=>{
       let arr = users.map((user)=>{
@@ -46,10 +48,11 @@ class App extends React.Component{
     });
   }
 
+
   hundleGetProfile(user) {
     this.setState({profile: user });
-    console.log(this.state.profile)
   }
+
 
   hundleGetCarts() {
     return(
@@ -70,8 +73,8 @@ class App extends React.Component{
           <button type="button" className="btn btn-success" onClick={this.hundleGetUser} >list contact</button>
         </header>
         <div className="text-center carUsers" >
-          <Profile user={this.state.arrayUsers[0]}/>
           <div className="cards">
+          {/*show arr cart users || show Profile user*/}
           {this.state.profile === null ? this.hundleGetCarts() : <Profile user={this.state.profile}/> }
           </div>
   	    </div>
