@@ -39,6 +39,7 @@ class App extends React.Component{
   hundleGetUser () {
   	GetUser((users)=>{
       let arr = users.map((user)=>{
+        // console.log(user)
         return {
           name: user.name,
           username: user.username,
@@ -52,7 +53,7 @@ class App extends React.Component{
             catchPhrase: user.company.catchPhrase,
             name: user.company.name
           },
-          accountHistory: user.company.accountHistory,
+          accountHistory: user.accountHistory,
           address: {
             city: user.address,
             country: user.address,

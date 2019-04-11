@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Table from './table/Table'
+import TableHistory from './table/TableHistory'
 
 class  Profile extends React.Component {
   constructor(props) {
@@ -28,7 +29,7 @@ class  Profile extends React.Component {
         return <div>adress</div>;
         break
       case "histrory":
-        return <div>histrory</div>;
+        return <TableHistory history={user.accountHistory}/>;
         break
       default:
       return <Table user={user}/>
@@ -90,14 +91,7 @@ class  Profile extends React.Component {
                         <div className="tab-content profile-tab" id="myTabContent">
 
                             {this.getTable()}
-
-                            <div className="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                              <div className="row">
-                                  <div className="col-md-6">
-                                      <label>Experience</label>
-                                  </div>
-                              </div>
-                            </div>
+                            
                         </div>
                     </div>
                 </div>
