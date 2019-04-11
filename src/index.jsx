@@ -37,6 +37,12 @@ class App extends React.Component{
 
 
   hundleGetUser () {
+    let arrContacts = JSON.parse((localStorage.getItem('arrContacts')));
+    if(arrContacts) {
+      this.setState( {arrayUsers: arrContacts, profile: null});
+      return
+    }
+
   	GetUser((users)=>{
       let arr = users.map((user)=>{
         // console.log(user)
@@ -69,6 +75,7 @@ class App extends React.Component{
         }
       })
       this.setState( {arrayUsers: arr, profile: null});
+      localStorage.setItem('arrContacts', JSON.stringify(arr))
     });
   }
 
