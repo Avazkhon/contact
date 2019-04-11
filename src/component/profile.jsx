@@ -7,12 +7,32 @@ class  Profile extends React.Component {
     super(props)
     this.state = {
       user: props.user,
-      tableId: "home" 
+      tableId: "main" 
     }
+
+    this.getTable = this.getTable.bind(this);
   }
 
   handleTable(props) {
-    console.log(props)
+    this.setState({tableId: props})
+  }
+
+  getTable() {
+    let user = this.state.user;
+    // show dafault the className homeBtn
+    switch(this.state.tableId){
+      case "company":
+        return <div>{user.company.name}</div>;
+        break
+      case "adress":
+        return <div>adress</div>;
+        break
+      case "histrory":
+        return <div>histrory</div>;
+        break
+      default:
+      return <Table user={user}/>
+    }
   }
 
   // add content the future
@@ -39,10 +59,16 @@ class  Profile extends React.Component {
                                 <li className="nav-item">
 
                                     {/*add className active if active the future*/}
-                                    <button type="button" id="homeBtn" className="btn btn-light nav-link" onClick={this.handleTable.bind(this, "homeBtn")}>Светлый</button>
+                                    <button type="button" id="homeBtn" className="btn btn-light nav-link" onClick={this.handleTable.bind(this, "main")}>main</button>
                                 </li>
                                 <li className="nav-item">
-                                    <a className="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">line</a>
+                                    <button type="button" id="homeBtn" className="btn btn-light nav-link" onClick={this.handleTable.bind(this, "histrory")}>histrory</button>
+                                </li>
+                                <li className="nav-item">
+                                    <button type="button" id="homeBtn" className="btn btn-light nav-link" onClick={this.handleTable.bind(this, "adress")}>adress</button>
+                                </li>
+                                <li className="nav-item">
+                                    <button type="button" id="homeBtn" className="btn btn-light nav-link" onClick={this.handleTable.bind(this, "company")}>company</button>
                                 </li>
                             </ul>
                         </div>
@@ -63,8 +89,7 @@ class  Profile extends React.Component {
                     <div className="col-md-8">
                         <div className="tab-content profile-tab" id="myTabContent">
 
-                            {/*show dafault the className homeBtn*/}
-                            <Table user={this.state.user}/>
+                            {this.getTable()}
 
                             <div className="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                               <div className="row">
@@ -72,12 +97,6 @@ class  Profile extends React.Component {
                                       <label>Experience</label>
                                   </div>
                               </div>
-                                <div className="row">
-                                    <div className="col-md-12">
-                                        <label>Your Bio</label><br/>
-                                        <p>Your detail description</p>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>

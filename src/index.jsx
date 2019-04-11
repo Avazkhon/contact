@@ -21,7 +21,12 @@ class App extends React.Component{
           avatar: null,
           id: null,
           phone: null,
-          website: null
+          website: null,
+          company: {
+            bs: null,
+            catchPhrase: null,
+            name: null
+          }
       }],
       profile: null
     }
@@ -41,7 +46,25 @@ class App extends React.Component{
           avatar: user.avatar,
           id: user.id,
           phone: user.phone,
-          website: user.website
+          website: user.website,
+          company: {
+            bs: user.company.bs,
+            catchPhrase: user.company.catchPhrase,
+            name: user.company.name
+          },
+          accountHistory: user.company.accountHistory,
+          address: {
+            city: user.address,
+            country: user.address,
+            geo: {lat: user.address.geo.lat , lng: user.address.geo.lat},
+            state: user.address.state,
+            streetA: user.address.streetA,
+            streetB: user.address.streetB,
+            streetC: user.address.streetC,
+            streetD: user.address.streetD,
+            zipcode: user.address.zipcode
+          },
+          posts: user.posts
         }
       })
       this.setState( {arrayUsers: arr, profile: null});
