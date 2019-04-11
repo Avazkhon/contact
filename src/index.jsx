@@ -33,6 +33,7 @@ class App extends React.Component{
 
   	this.hundleGetUser = this.hundleGetUser.bind(this);
     this.hundleGetCarts = this.hundleGetCarts.bind(this);
+    this.hundleCartSort = this.hundleCartSort.bind(this)
   }
 
 
@@ -95,6 +96,18 @@ class App extends React.Component{
     )
   }
 
+  hundleCartSort() {
+    let sortArr = this.state.arrayUsers.sort((a, b)=>{
+        let nameA = a.name,
+          nameB = b.name;
+          if(nameA < nameB) return -1
+          if(nameA > nameB) return 1
+            return 0
+    })
+    this.setState({arrayUsers: sortArr})
+    console.log(sortArr)
+  }
+
 
   render(){
   	return (
@@ -102,6 +115,7 @@ class App extends React.Component{
         <header>
           <h1 className="text-center" >Contact</h1>
           <button type="button" className="btn btn-success" onClick={this.hundleGetUser} >list contact</button>
+          <button type="button" className="btn btn-light" onClick={this.hundleCartSort} >A-z</button>
         </header>
         <div className="text-center carUsers" >
           <div className="cards">
