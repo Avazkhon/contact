@@ -2,11 +2,6 @@ import React from 'react';
 
 // Component
 function Card(props) {
-  // test arr
-  let arr = [
-    {name: "Anna Conroy"}, 
-    {name3: "name3", name4: 'name4'},
-  ];
   return (
      props.user.name === undefined ? null : <div className="card  col col-sm-5  col-md-4  col-lg-3  col-xl-2 " onClick={props.onProfile}>
       <img className="card-img-top" alt={props.user.name} src={props.user.avatar} />

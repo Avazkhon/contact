@@ -19,5 +19,6 @@ header {
 
 .card {
 	width: 18rem;
+	height: 462px;
 	float: left;
 }

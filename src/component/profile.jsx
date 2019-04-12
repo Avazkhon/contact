@@ -110,20 +110,10 @@ class  Profile extends React.Component {
                         <input type="button" className="profile-print-btn" value="Print Profile" onClick={window.print}/>
                     </div>
                 </div>
-                <div className="row">
+                <div className="row-4">
                     <div className="col-md-4">
-                        <div className="profile-work">
-                            <p>WORK LINK</p>
-                            <a href="#">List Link</a><br/>
-                            <p>text</p>
-                            <a href="#">Value Text</a><br/>
-                        </div>
-                    </div>
-                    <div className="col-md-8">
-                        <div className="tab-content profile-tab" id="myTabContent">
-                            {this.state.value}
-                            {this.getTable()}
-                            
+                        <div className="tab-content profile-tab">
+                          {this.getTable()} 
                         </div>
                     </div>
                 </div>
@@ -134,3 +124,13 @@ class  Profile extends React.Component {
 }
 
 export default Profile
+
+
+// <div className="col-md-4">
+//                         <div className="profile-work">
+//                             <p>WORK LINK</p>
+//                             <a href="#">List Link</a><br/>
+//                             <p>text</p>
+//                             <a href="#">Value Text</a><br/>
+//                         </div>
+//                     </div>
