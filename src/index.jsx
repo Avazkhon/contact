@@ -46,7 +46,6 @@ class App extends React.Component{
 
   	GetUser((users)=>{
       let arr = users.map((user)=>{
-        // console.log(user)
         return {
           name: user.name,
           username: user.username,
@@ -105,7 +104,6 @@ class App extends React.Component{
             return 0
     })
     this.setState({arrayUsers: sortArr})
-    console.log(sortArr)
   }
 
 

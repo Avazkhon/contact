@@ -4,7 +4,7 @@ function TextP(props) {
   return(
 
     <div className="col-md-6">
-        <p>{props.text}</p>
+        <p><input type="text" className={`${props.addClass} TextP`} name={props.name} defaultValue={props.text} onChange={props.hundleChange} /></p>
     </div>
   )
 }

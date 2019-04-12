@@ -4,22 +4,28 @@ import Table from './table/Table'
 import TableHistory from './table/TableHistory'
 
 class  Profile extends React.Component {
+
   constructor(props) {
     super(props)
     this.state = {
       user: props.user,
-      tableId: "main" 
+      tableId: "main"
     }
 
     this.getTable = this.getTable.bind(this);
+    this.hundleChange = this.hundleChange.bind(this);
   }
 
-  handleTable(props) {
+  
+  hundleTable(props) {
     this.setState({tableId: props})
   }
 
+
+  // show the specified table
   getTable() {
     let user = this.state.user;
+
     // show dafault the className homeBtn
     switch(this.state.tableId){
       case "company":
@@ -28,15 +34,41 @@ class  Profile extends React.Component {
       case "adress":
         return <div>adress</div>;
         break
-      case "histrory":
-        return <TableHistory history={user.accountHistory}/>;
+      case "accountHistory":
+        return <TableHistory history={user.accountHistory} hundleChange={this.hundleChange} />;
         break
       default:
-      return <Table user={user}/>
+      return <Table user={user} hundleChange={this.hundleChange} />
     }
   }
 
-  // add content the future
+
+  hundleChange(e) {
+    let name = e.target.name;
+    let value = e.target.value;
+    let className = e.target.className[0];
+    let table = this.state.tableId;
+    let user = this.state.user;
+    let arrContacts = JSON.parse((localStorage.getItem('arrContacts')));
+
+
+    this.setState((optios)=>{
+
+      optios.user[table][className - 1][name] = value;
+    }, ()=>{
+        // callback
+          let newArrContacts =  arrContacts.map((item)=>{
+          if(item.id === user.id){
+           return item = user;
+          }
+          return item
+        })
+        localStorage.setItem('arrContacts', JSON.stringify(newArrContacts))
+    } )
+
+  }
+
+
   render() {
     return (
       <div className="container emp-profile">
@@ -60,16 +92,16 @@ class  Profile extends React.Component {
                                 <li className="nav-item">
 
                                     {/*add className active if active the future*/}
-                                    <button type="button" id="homeBtn" className="btn btn-light nav-link" onClick={this.handleTable.bind(this, "main")}>main</button>
+                                    <button type="button" id="homeBtn" className="btn btn-light nav-link" onClick={this.hundleTable.bind(this, "main")}>main</button>
                                 </li>
                                 <li className="nav-item">
-                                    <button type="button" id="homeBtn" className="btn btn-light nav-link" onClick={this.handleTable.bind(this, "histrory")}>histrory</button>
+                                    <button type="button" id="homeBtn" className="btn btn-light nav-link" onClick={this.hundleTable.bind(this, "accountHistory")}>histrory</button>
                                 </li>
                                 <li className="nav-item">
-                                    <button type="button" id="homeBtn" className="btn btn-light nav-link" onClick={this.handleTable.bind(this, "adress")}>adress</button>
+                                    <button type="button" id="homeBtn" className="btn btn-light nav-link" onClick={this.hundleTable.bind(this, "adress")}>adress</button>
                                 </li>
                                 <li className="nav-item">
-                                    <button type="button" id="homeBtn" className="btn btn-light nav-link" onClick={this.handleTable.bind(this, "company")}>company</button>
+                                    <button type="button" id="homeBtn" className="btn btn-light nav-link" onClick={this.hundleTable.bind(this, "company")}>company</button>
                                 </li>
                             </ul>
                         </div>
@@ -89,7 +121,7 @@ class  Profile extends React.Component {
                     </div>
                     <div className="col-md-8">
                         <div className="tab-content profile-tab" id="myTabContent">
-
+                            {this.state.value}
                             {this.getTable()}
                             
                         </div>
