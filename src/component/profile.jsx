@@ -51,13 +51,14 @@ class  Profile extends React.Component {
     let className = e.target.className[0];
     let table = this.state.tableId;
     let user = this.state.user;
-    let arrContacts = JSON.parse((localStorage.getItem('arrContacts')));
+    // let arrContacts = JSON.parse((localStorage.getItem('arrContacts')));
 
 
     this.setState((optios)=>{
 
       optios.user[table][className - 1][name] = value;
-    }, UpdateLocalStorage() )
+      UpdateLocalStorage(optios.user);
+    })
 
   }
 
@@ -65,12 +66,13 @@ class  Profile extends React.Component {
     let name = e.target.name;
     let value = e.target.value;
     let user = this.state.user;
-    let arrContacts = JSON.parse((localStorage.getItem('arrContacts')));
-    // console.log({[name]: value})
+    // let arrContacts = JSON.parse((localStorage.getItem('arrContacts')));
 
     this.setState((item)=>{
-      item.user[name] = value
-    }, UpdateLocalStorage(arrContacts, user) )
+
+      item.user[name] = value;
+      UpdateLocalStorage(item.user);
+    })
   }
 
 

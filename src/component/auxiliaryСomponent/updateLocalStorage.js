@@ -1,5 +1,6 @@
-let updateLocalStorage = (arrContacts, user)=>{
+let updateLocalStorage = ( user )=>{
     // callback
+      let arrContacts = JSON.parse((localStorage.getItem('arrContacts')));
       let newArrContacts =  arrContacts.map((item)=>{
       if(item.id === user.id){
        return item = user; // add the user in arr
