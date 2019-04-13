@@ -14,6 +14,7 @@ class  Profile extends React.Component {
 
     this.getTable = this.getTable.bind(this);
     this.hundleChange = this.hundleChange.bind(this);
+    this.hundleChangeTableMain = this.hundleChangeTableMain.bind(this);
   }
 
   
@@ -38,7 +39,7 @@ class  Profile extends React.Component {
         return <TableHistory history={user.accountHistory} hundleChange={this.hundleChange} />;
         break
       default:
-      return <Table user={user} hundleChange={this.hundleChange} />
+      return <Table user={user} hundleChangeTableMain={this.hundleChangeTableMain} />
     }
   }
 
@@ -59,13 +60,36 @@ class  Profile extends React.Component {
         // callback
           let newArrContacts =  arrContacts.map((item)=>{
           if(item.id === user.id){
-           return item = user;
+           return item = user; // add the user in arr
           }
           return item
         })
         localStorage.setItem('arrContacts', JSON.stringify(newArrContacts))
     } )
 
+  }
+
+  hundleChangeTableMain(e) {
+    let name = e.target.name;
+    let value = e.target.value;
+    let user = this.state.user;
+    let arrContacts = JSON.parse((localStorage.getItem('arrContacts')));
+    // console.log({[name]: value})
+
+    this.setState((item)=>{
+      item.user[name] = value
+    }, ()=>{
+        // callback
+          let newArrContacts =  arrContacts.map((item)=>{
+          if(item.id === user.id){
+            console.log(this.state.user)
+           return item = user; // add the user in arr
+          }
+          return item
+        })
+          console.log(newArrContacts)
+        localStorage.setItem('arrContacts', JSON.stringify(newArrContacts))
+    } )
   }
 
 
@@ -124,13 +148,3 @@ class  Profile extends React.Component {
 }
 
 export default Profile
-
-
-// <div className="col-md-4">
-//                         <div className="profile-work">
-//                             <p>WORK LINK</p>
-//                             <a href="#">List Link</a><br/>
-//                             <p>text</p>
-//                             <a href="#">Value Text</a><br/>
-//                         </div>
-//                     </div>

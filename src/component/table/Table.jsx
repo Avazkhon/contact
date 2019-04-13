@@ -9,19 +9,21 @@ function Table(props) {
       <div className="col-md-6">
         <label>Name</label>
       </div>
-      <TextP name="name" text={props.user.name} />
+      <TextP name="name" text={props.user.name} hundleChange={props.hundleChangeTableMain}/>
       <div className="col-md-6">
         <label>Id</label>
       </div>
-      <TextP name="id" text={props.user.id} />
+      <div className="col-md-6">
+        <p name="id" >{props.user.id}</p>
+      </div>
       <div className="col-md-6">
         <label>Phone</label>
       </div>
-      <TextP name="phone" text={props.user.phone} />
+      <TextP name="phone" text={props.user.phone} hundleChange={props.hundleChangeTableMain} />
       <div className="col-md-6">
         <label>Email</label>
       </div>
-      <TextP name="email" text={props.user.email} />
+      <TextP name="email" text={props.user.email} hundleChange={props.hundleChangeTableMain} />
     </div>
   </div>
   )
