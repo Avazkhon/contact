@@ -1,7 +1,8 @@
 import React from 'react';
 
-import Table from './table/Table'
-import TableHistory from './table/TableHistory'
+import Table from './table/Table';
+import TableHistory from './table/TableHistory';
+import UpdateLocalStorage from './auxiliaryСomponent/updateLocalStorage'
 
 class  Profile extends React.Component {
 
@@ -56,16 +57,7 @@ class  Profile extends React.Component {
     this.setState((optios)=>{
 
       optios.user[table][className - 1][name] = value;
-    }, ()=>{
-        // callback
-          let newArrContacts =  arrContacts.map((item)=>{
-          if(item.id === user.id){
-           return item = user; // add the user in arr
-          }
-          return item
-        })
-        localStorage.setItem('arrContacts', JSON.stringify(newArrContacts))
-    } )
+    }, UpdateLocalStorage() )
 
   }
 
@@ -78,18 +70,7 @@ class  Profile extends React.Component {
 
     this.setState((item)=>{
       item.user[name] = value
-    }, ()=>{
-        // callback
-          let newArrContacts =  arrContacts.map((item)=>{
-          if(item.id === user.id){
-            console.log(this.state.user)
-           return item = user; // add the user in arr
-          }
-          return item
-        })
-          console.log(newArrContacts)
-        localStorage.setItem('arrContacts', JSON.stringify(newArrContacts))
-    } )
+    }, UpdateLocalStorage(arrContacts, user) )
   }
 
 
@@ -103,7 +84,7 @@ class  Profile extends React.Component {
                             <img src={this.state.user.avatar} alt={this.state.user.name} />
                             <div className="file btn btn-lg btn-primary">
                                 Change Photo
-                                <input type="prin" name="file"/>
+                                <input type="file" name="file"/>
                             </div>
                         </div>
                     </div>
