@@ -2,7 +2,8 @@ import React from 'react';
 
 import Table from './table/Table';
 import TableHistory from './table/TableHistory';
-import UpdateLocalStorage from './auxiliaryСomponent/updateLocalStorage'
+import UpdateLocalStorage from './auxiliaryСomponent/updateLocalStorage';
+import GetStar from './imgComponent/getStar'
 
 class  Profile extends React.Component {
 
@@ -10,18 +11,33 @@ class  Profile extends React.Component {
     super(props)
     this.state = {
       user: props.user,
-      tableId: "main"
+      tableId: "main",
+      select: false
     }
 
     this.getTable = this.getTable.bind(this);
     this.hundleChange = this.hundleChange.bind(this);
     this.hundleChangeTableMain = this.hundleChangeTableMain.bind(this);
+    this.hundleSelect = this.hundleSelect.bind(this);
   }
 
   
   hundleTable(props) {
     this.setState({tableId: props})
   }
+
+
+  hundleSelect(){
+
+    // fix button in the future
+   this.setState(state => ({
+      select: !state.select
+    }));
+   this.setState((state)=>{
+      state.user.select = this.state.select;
+      UpdateLocalStorage(state.user);
+   })
+ }
 
 
   // show the specified table
@@ -51,7 +67,6 @@ class  Profile extends React.Component {
     let className = e.target.className[0];
     let table = this.state.tableId;
     let user = this.state.user;
-    // let arrContacts = JSON.parse((localStorage.getItem('arrContacts')));
 
 
     this.setState((optios)=>{
@@ -66,7 +81,6 @@ class  Profile extends React.Component {
     let name = e.target.name;
     let value = e.target.value;
     let user = this.state.user;
-    // let arrContacts = JSON.parse((localStorage.getItem('arrContacts')));
 
     this.setState((item)=>{
 
@@ -109,6 +123,11 @@ class  Profile extends React.Component {
                                 </li>
                                 <li className="nav-item">
                                     <button type="button" id="homeBtn" className="btn btn-light nav-link" onClick={this.hundleTable.bind(this, "company")}>company</button>
+                                </li>
+                                <li className="nav-item">
+                                    <button type="button" id="homeBtn" className="btn btn-light nav-link" onClick={this.hundleSelect}>
+                                    <GetStar boolean={this.state.user.select} />
+                                    </button>
                                 </li>
                             </ul>
                         </div>

@@ -6,8 +6,9 @@ import './css/profile.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import GetUser from './xhr/getUser';
-import Card from './component/Card'
-import Profile from './component/Profile'
+import Card from './component/Card';
+import Profile from './component/Profile';
+import GetStart from './component/imgComponent/getStar';
 
 
 class App extends React.Component{
@@ -28,12 +29,16 @@ class App extends React.Component{
             name: null
           }
       }],
-      profile: null
+      profile: null,
+      select: false,
+      search: ""
     }
 
   	this.hundleGetUser = this.hundleGetUser.bind(this);
     this.hundleGetCarts = this.hundleGetCarts.bind(this);
-    this.hundleCartSort = this.hundleCartSort.bind(this)
+    this.hundleCartSort = this.hundleCartSort.bind(this);
+    this.hundleCartSelect = this.hundleCartSelect.bind(this);
+    this.hudleSearch = this.hudleSearch.bind(this);
   }
 
 
@@ -54,6 +59,7 @@ class App extends React.Component{
           id: user.id,
           phone: user.phone,
           website: user.website,
+          select: false,
           company: {
             bs: user.company.bs,
             catchPhrase: user.company.catchPhrase,
@@ -107,13 +113,79 @@ class App extends React.Component{
   }
 
 
+  hundleCartSelect() {
+    if(this.state.select) {
+      this.hundleGetUser()
+      this.setState({select: !this.state.select})
+    }
+
+    else {
+      let newArray = [];
+      this.state.arrayUsers.map((user)=>{
+        if(user.select){
+          newArray.push(user)
+        }
+      })
+      this.setState({arrayUsers: newArray, select: !this.state.select})
+    }
+  }
+
+
+  hudleSearch(e) {
+    let text = e.target.value;
+    this.setState({search: text})
+    search(text, (users)=>{
+      this.setState({arrayUsers: users})
+    })
+     // select a separate component
+    function search (text, colback) {
+      let arrContacts = JSON.parse((localStorage.getItem('arrContacts')));
+      let newArr  = [];
+      arrContacts.map((user)=>{
+
+          for( let key in user ) {
+            const textSearch = String(user[key]);
+            //  search input = textSearch in arrContacts
+            if(text.toLowerCase() === textSearch.toLowerCase()) {
+
+              newArr.push(user);
+            }
+          }
+      });
+
+      colback(newArr)
+    }
+  }
+
+
   render(){
   	return (
   	  <div className="app text-center ">
         <header>
           <h1 className="text-center" >Contact</h1>
-          <button type="button" className="btn btn-success" onClick={this.hundleGetUser} >list contact</button>
-          <button type="button" className="btn btn-light" onClick={this.hundleCartSort} >A-z</button>
+          <div className="row">
+            <div className="col col-md-3">
+              <button type="button" className="btn btn-success" onClick={this.hundleGetUser} >list contact</button>
+            </div>
+            <div className="col col-md-1">
+              <button type="button" className="btn btn-light" onClick={this.hundleCartSort} >A-z</button>
+            </div>
+            <div className="col col-md-1">
+              <button type="button" className="btn btn-light" onClick={this.hundleCartSelect} >
+                <GetStart boolean={this.state.select}/>
+              </button>
+            </div>
+            <div className="col col-md-6">
+              <div className="row">
+                <div className="col col-md-3">
+                  <input type="search" placeholder="Text" onChange={this.hudleSearch} value={this.state.search} />
+                </div>
+                <div className="col col-md-5">
+                 <input type="button" value="Search" />
+                </div>
+              </div>
+            </div>
+          </div>
         </header>
         <div className="text-center carUsers" >
           <div className="cards">
