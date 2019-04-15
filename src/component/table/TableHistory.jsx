@@ -1,6 +1,6 @@
 import React from 'react';
 
-import TextP from './TextP'
+import TextComponent from './tableComponents/textComponent'
 
 function TableHistory(props) {
   let content = props.history.map((item, i)=>{
@@ -9,11 +9,29 @@ function TableHistory(props) {
   <tbody key={item.amount} >
     <tr>
       <th scope="row">{i}</th>
-      <td><TextP name="account" addClass={i} text={item.account} hundleChange={props.hundleChange} /></td>
-      <td><TextP name="amount" addClass={i} text={item.amount} hundleChange={props.hundleChange} /></td>
-      <td><TextP name="date" addClass={i} text={item.date} hundleChange={props.hundleChange} /></td>
-      <td><TextP name="name" addClass={i} text={item.name} hundleChange={props.hundleChange} /></td>
-      <td><TextP name="type" addClass={i} text={item.type} hundleChange={props.hundleChange} /></td>
+      <td><TextComponent
+        name="account" addClass={i}
+        text={item.account} change={props.change}
+        hundleChange={props.hundleChange} hundleGetInputHistory={props.hundleGetInputHistory} /></td>
+
+      <td><TextComponent
+        name="amount" addClass={i} text={item.amount}
+        change={props.change} hundleChange={props.hundleChange}
+        hundleGetInputHistory={props.hundleGetInputHistory} /></td>
+
+      <td><TextComponent
+        name="date" addClass={i} text={item.date}
+        change={props.change} hundleChange={props.hundleChange}
+        hundleGetInputHistory={props.hundleGetInputHistory} /></td>
+
+      <td><TextComponent
+        name="name" addClass={i} text={item.name} change={props.change}
+        hundleChange={props.hundleChange} hundleGetInputHistory={props.hundleGetInputHistory} /></td>
+
+      <td><TextComponent
+        name="type" addClass={i} text={item.type} change={props.change}
+        hundleChange={props.hundleChange} hundleGetInputHistory={props.hundleGetInputHistory} /></td>
+        
     </tr>
   </tbody>
     )

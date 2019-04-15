@@ -12,13 +12,15 @@ class  Profile extends React.Component {
     this.state = {
       user: props.user,
       tableId: "main",
-      select: false
+      select: false,
+      change: {className: "", title: ""}
     }
 
     this.getTable = this.getTable.bind(this);
     this.hundleChange = this.hundleChange.bind(this);
     this.hundleChangeTableMain = this.hundleChangeTableMain.bind(this);
     this.hundleSelect = this.hundleSelect.bind(this);
+    this.hundleGetInputHistory = this.hundleGetInputHistory.bind(this);
   }
 
   
@@ -26,13 +28,14 @@ class  Profile extends React.Component {
     this.setState({tableId: props})
   }
 
-
+  // add star
   hundleSelect(){
 
     // fix button in the future
    this.setState(state => ({
       select: !state.select
     }));
+
    this.setState((state)=>{
       state.user.select = this.state.select;
       UpdateLocalStorage(state.user);
@@ -53,7 +56,7 @@ class  Profile extends React.Component {
         return <div>adress</div>;
         break
       case "accountHistory":
-        return <TableHistory history={user.accountHistory} hundleChange={this.hundleChange} />;
+        return <TableHistory history={user.accountHistory} change={this.state.change} hundleChange={this.hundleChange} hundleGetInputHistory={this.hundleGetInputHistory} />;
         break
       default:
       return <Table user={user} hundleChangeTableMain={this.hundleChangeTableMain} />
@@ -63,7 +66,7 @@ class  Profile extends React.Component {
 
   hundleChange(e) {
     let name = e.target.name;
-    let value = e.target.value;
+    let value = e.target.value == "" ? "undefined" : e.target.value;
     let className = e.target.className[0];
     let table = this.state.tableId;
     let user = this.state.user;
@@ -77,9 +80,10 @@ class  Profile extends React.Component {
 
   }
 
+
   hundleChangeTableMain(e) {
     let name = e.target.name;
-    let value = e.target.value;
+    let value = e.target.value == "" ? "undefined" : e.target.value;
     let user = this.state.user;
 
     this.setState((item)=>{
@@ -89,6 +93,15 @@ class  Profile extends React.Component {
     })
   }
 
+
+  hundleGetInputHistory(event){
+    let title = event.target.title;
+    let className = event.target.className[0];
+
+    this.setState({change: {className, title}})
+    console.log(this.state.change)
+  }
+  
 
   render() {
     return (
