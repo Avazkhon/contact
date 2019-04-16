@@ -5,6 +5,7 @@ import './css/style.css';
 import './css/profile.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+import Header from './component/Header';
 import GetUser from './xhr/getUser';
 import Card from './component/Card';
 import Profile from './component/Profile';
@@ -31,7 +32,7 @@ class App extends React.Component{
       }],
       profile: null,
       select: false,
-      search: ""
+      search: "",
     }
 
   	this.hundleGetUser = this.hundleGetUser.bind(this);
@@ -101,6 +102,7 @@ class App extends React.Component{
     )
   }
 
+
   hundleCartSort() {
     let sortArr = this.state.arrayUsers.sort((a, b)=>{
         let nameA = a.name,
@@ -160,35 +162,19 @@ class App extends React.Component{
 
   render(){
   	return (
-  	  <div className="app text-center ">
-        <header>
-          <h1 className="text-center" >Contact</h1>
-          <div className="row">
-            <div className="col col-md-3">
-              <button type="button" className="btn btn-success" onClick={this.hundleGetUser} >list contact</button>
-            </div>
-            <div className="col col-md-1">
-              <button type="button" className="btn btn-light" onClick={this.hundleCartSort} >A-z</button>
-            </div>
-            <div className="col col-md-1">
-              <button type="button" className="btn btn-light" onClick={this.hundleCartSelect} >
-                <GetStart boolean={this.state.select}/>
-              </button>
-            </div>
-            <div className="col col-md-6">
-              <div className="row">
-                <div className="col col-md-3">
-                  <input type="search" placeholder="Text" onChange={this.hudleSearch} value={this.state.search} />
-                </div>
-                <div className="col col-md-5">
-                 <input type="button" value="Search" />
-                </div>
-              </div>
-            </div>
-          </div>
-        </header>
-        <div className="text-center carUsers" >
-          <div className="cards">
+  	  <div className="app text-center row">
+        <div className="text-center col-12">
+          <Header hundle={{
+            hundleGetUser: this.hundleGetUser,
+            hundleCartSort: this.hundleCartSort,
+            hundleCartSelect: this.hundleCartSelect,
+            state: this.state,
+            hudleSearch: this.hudleSearch
+
+          }} />
+        </div>
+        <div className="text-center carUsers col-12" >
+          <div className="cards row">
           {/*show arr cart users || show Profile user*/}
           {this.state.profile === null ? this.hundleGetCarts() : <Profile user={this.state.profile}/> }
           </div>
@@ -197,6 +183,7 @@ class App extends React.Component{
   	) 
   }
 }
+
 
 ReactDOM.render(
   <App />,
