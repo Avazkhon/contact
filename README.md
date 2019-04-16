@@ -9,10 +9,10 @@
 #### `cd contact`
 
 ### dependency setting
-#### `npm installt`
+#### `npm install`
 
 ### farther
-#### `npm startt`
+#### `npm start`
 
 ### go browser
 #### open `http://localhost:8080/`
