@@ -9,7 +9,6 @@ function textComponent(props) {
 
   else {
   	return(
-
       <div className="col-md-6">
         <p className={`${props.addClass} TextP text-center`} title={props.name} onClick={props.hundleGetInputHistory}>{props.text}</p>
       </div>

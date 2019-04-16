@@ -1,4 +1,4 @@
-function getUser (colaback) {
+function getUser (callback) {
   let xhr = new XMLHttpRequest();
   let url = "http://demo.sibers.com/users";
 
@@ -7,7 +7,7 @@ function getUser (colaback) {
   xhr.onreadystatechange = ()=>{
     if(xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200){
     	let arrayUsers = JSON.parse(xhr.response);
-      colaback(arrayUsers)
+      callback(arrayUsers)
     }
   }
   xhr.send();

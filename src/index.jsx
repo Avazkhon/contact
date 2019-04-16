@@ -19,31 +19,32 @@ class App extends React.Component{
     this.state = {
     	arrayUsers: [{
         username: null,
-          email: null,
-          avatar: null,
-          id: null,
-          phone: null,
-          website: null,
-          company: {
-            bs: null,
-            catchPhrase: null,
-            name: null
-          }
+        email: null,
+        avatar: null,
+        id: null,
+        phone: null,
+        website: null,
+        company: {
+          bs: null,
+          catchPhrase: null,
+          name: null
+        }
       }],
+
       profile: null,
       select: false,
       search: "",
     }
 
-  	this.hundleGetUser = this.hundleGetUser.bind(this);
-    this.hundleGetCarts = this.hundleGetCarts.bind(this);
-    this.hundleCartSort = this.hundleCartSort.bind(this);
-    this.hundleCartSelect = this.hundleCartSelect.bind(this);
-    this.hudleSearch = this.hudleSearch.bind(this);
+  	this.handleGetUser = this.handleGetUser.bind(this);
+    this.handleGetCarts = this.handleGetCarts.bind(this);
+    this.handleCartSort = this.handleCartSort.bind(this);
+    this.handleCartSelect = this.handleCartSelect.bind(this);
+    this.handleSearch = this.handleSearch.bind(this);
   }
 
 
-  hundleGetUser () {
+  handleGetUser () {
     let arrContacts = JSON.parse((localStorage.getItem('arrContacts')));
     if(arrContacts) {
       this.setState( {arrayUsers: arrContacts, profile: null});
@@ -61,12 +62,13 @@ class App extends React.Component{
           phone: user.phone,
           website: user.website,
           select: false,
+          accountHistory: user.accountHistory,
+          posts: user.posts,
           company: {
             bs: user.company.bs,
             catchPhrase: user.company.catchPhrase,
             name: user.company.name
           },
-          accountHistory: user.accountHistory,
           address: {
             city: user.address,
             country: user.address,
@@ -77,47 +79,48 @@ class App extends React.Component{
             streetC: user.address.streetC,
             streetD: user.address.streetD,
             zipcode: user.address.zipcode
-          },
-          posts: user.posts
+          }
         }
       })
+
       this.setState( {arrayUsers: arr, profile: null});
       localStorage.setItem('arrContacts', JSON.stringify(arr))
     });
   }
 
 
-  hundleGetProfile(user) {
+  handleGetProfile(user) {
     this.setState({profile: user });
   }
 
 
-  hundleGetCarts() {
+  handleGetCarts() {
     return(
       this.state.arrayUsers.map((user, index)=>{
         return (
-          <Card user={user} key={index+user.name} onProfile={this.hundleGetProfile.bind(this, user)} />
+          <Card user={user} key={index+user.name} onProfile={this.handleGetProfile.bind(this, user)} />
         )
       })
     )
   }
 
 
-  hundleCartSort() {
+  handleCartSort() {
     let sortArr = this.state.arrayUsers.sort((a, b)=>{
-        let nameA = a.name,
-          nameB = b.name;
-          if(nameA < nameB) return -1
-          if(nameA > nameB) return 1
-            return 0
+    let nameA = a.name,
+      nameB = b.name;
+      if(nameA < nameB) return -1
+      if(nameA > nameB) return 1
+      return 0
     })
+
     this.setState({arrayUsers: sortArr})
   }
 
 
-  hundleCartSelect() {
+  handleCartSelect() {
     if(this.state.select) {
-      this.hundleGetUser()
+      this.handleGetUser()
       this.setState({select: !this.state.select})
     }
 
@@ -128,34 +131,37 @@ class App extends React.Component{
           newArray.push(user)
         }
       })
+      
       this.setState({arrayUsers: newArray, select: !this.state.select})
     }
   }
 
 
-  hudleSearch(e) {
+  handleSearch(e) {
     let text = e.target.value;
     this.setState({search: text})
+
     search(text, (users)=>{
       this.setState({arrayUsers: users})
     })
      // select a separate component
-    function search (text, colback) {
+    function search (text, callback) {
       let arrContacts = JSON.parse((localStorage.getItem('arrContacts')));
       let newArr  = [];
+
       arrContacts.map((user)=>{
 
-          for( let key in user ) {
-            const textSearch = String(user[key]);
-            //  search input = textSearch in arrContacts
-            if(text.toLowerCase() === textSearch.toLowerCase()) {
+        for( let key in user ) {
+          const textSearch = String(user[key]);
+          //  search input = textSearch in arrContacts
+          if(text.toLowerCase() === textSearch.toLowerCase()) {
 
-              newArr.push(user);
-            }
+            newArr.push(user);
           }
+        }
       });
 
-      colback(newArr)
+      callback(newArr)
     }
   }
 
@@ -164,19 +170,20 @@ class App extends React.Component{
   	return (
   	  <div className="app text-center row">
         <div className="text-center col-12">
-          <Header hundle={{
-            hundleGetUser: this.hundleGetUser,
-            hundleCartSort: this.hundleCartSort,
-            hundleCartSelect: this.hundleCartSelect,
+          <Header handle={{
+
+            handleGetUser: this.handleGetUser,
+            handleCartSort: this.handleCartSort,
+            handleCartSelect: this.handleCartSelect,
             state: this.state,
-            hudleSearch: this.hudleSearch
+            handleSearch: this.handleSearch
 
           }} />
         </div>
         <div className="text-center carUsers col-12" >
           <div className="cards row">
           {/*show arr cart users || show Profile user*/}
-          {this.state.profile === null ? this.hundleGetCarts() : <Profile user={this.state.profile}/> }
+          {this.state.profile === null ? this.handleGetCarts() : <Profile user={this.state.profile}/> }
           </div>
   	    </div>
       </div>

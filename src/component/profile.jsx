@@ -32,11 +32,11 @@ class  Profile extends React.Component {
   hundleSelect(){
 
     // fix button in the future
-   this.setState(state => ({
+    this.setState((state) => ({
       select: !state.select
     }));
 
-   this.setState((state)=>{
+    this.setState((state)=>{
       state.user.select = this.state.select;
       UpdateLocalStorage(state.user);
    })
@@ -106,58 +106,58 @@ class  Profile extends React.Component {
   render() {
     return (
       <div className="container emp-profile">
-            <form method="post">
-                <div className="row">
-                    <div className="col-md-4">
-                        <div className="profile-img">
-                            <img src={this.state.user.avatar} alt={this.state.user.name} />
-                            <div className="file btn btn-lg btn-primary">
-                                Change Photo
-                                <input type="file" name="file"/>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-md-6">
-                        <div className="profile-head">
-                            <h5>
-                              {this.state.user.name}
-                            </h5>
-                            <ul className="nav nav-tabs" id="myTab" role="tablist">
-                                <li className="nav-item">
+        <form method="post">
+          <div className="row">
+              <div className="col-md-4">
+                <div className="profile-img">
+                  <img src={this.state.user.avatar} alt={this.state.user.name} />
+                  <div className="file btn btn-lg btn-primary">
+                    Change Photo
+                    <input type="file" name="file"/>
+                  </div>
+                </div>
+              </div>
+              <div className="col-md-6">
+                <div className="profile-head">
+                  <h5>
+                    {this.state.user.name}
+                  </h5>
+                  <ul className="nav nav-tabs" id="myTab" role="tablist">
+                    <li className="nav-item">
 
-                                    {/*add className active if active the future*/}
-                                    <button type="button" id="homeBtn" className="btn btn-light nav-link" onClick={this.hundleTable.bind(this, "main")}>main</button>
-                                </li>
-                                <li className="nav-item">
-                                    <button type="button" id="homeBtn" className="btn btn-light nav-link" onClick={this.hundleTable.bind(this, "accountHistory")}>histrory</button>
-                                </li>
-                                <li className="nav-item">
-                                    <button type="button" id="homeBtn" className="btn btn-light nav-link" onClick={this.hundleTable.bind(this, "adress")}>adress</button>
-                                </li>
-                                <li className="nav-item">
-                                    <button type="button" id="homeBtn" className="btn btn-light nav-link" onClick={this.hundleTable.bind(this, "company")}>company</button>
-                                </li>
-                                <li className="nav-item">
-                                    <button type="button" id="homeBtn" className="btn btn-light nav-link" onClick={this.hundleSelect}>
-                                    <GetStar boolean={this.state.user.select} />
-                                    </button>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div className="col-md-2">
-                        <input type="button" className="profile-print-btn" value="Print Profile" onClick={window.print}/>
-                    </div>
+                        {/*add className active if active the future*/}
+                      <button type="button" id="homeBtn" className="btn btn-light nav-link" onClick={this.hundleTable.bind(this, "main")}>main</button>
+                    </li>
+                    <li className="nav-item">
+                      <button type="button" id="homeBtn" className="btn btn-light nav-link" onClick={this.hundleTable.bind(this, "accountHistory")}>histrory</button>
+                    </li>
+                    <li className="nav-item">
+                      <button type="button" id="homeBtn" className="btn btn-light nav-link" onClick={this.hundleTable.bind(this, "adress")}>adress</button>
+                    </li>
+                    <li className="nav-item">
+                      <button type="button" id="homeBtn" className="btn btn-light nav-link" onClick={this.hundleTable.bind(this, "company")}>company</button>
+                    </li>
+                    <li className="nav-item">
+                      <button type="button" id="homeBtn" className="btn btn-light nav-link" onClick={this.hundleSelect}>
+                        <GetStar boolean={this.state.user.select} />
+                      </button>
+                    </li>
+                  </ul>
                 </div>
-                <div className="row-4">
-                    <div className="col-md-4">
-                        <div className="tab-content profile-tab">
-                          {this.getTable()} 
-                        </div>
-                    </div>
-                </div>
-            </form>           
-        </div>
+              </div>
+              <div className="col-md-2">
+                  <input type="button" className="profile-print-btn" value="Print Profile" onClick={window.print}/>
+              </div>
+          </div>
+          <div className="row-4">
+            <div className="col-md-4">
+              <div className="tab-content profile-tab">
+                {this.getTable()} 
+              </div>
+            </div>
+          </div>
+        </form>           
+      </div>
     )
   }
 }

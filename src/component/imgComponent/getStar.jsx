@@ -10,7 +10,7 @@ import React from 'react';
     )
   }
 
-    else{
+  else{
     return (
       <div className="text-center" >
         <img className="btnStar" src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Silver_star.png" alt="img-not-select" />
