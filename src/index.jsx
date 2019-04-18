@@ -114,13 +114,13 @@ class App extends React.Component{
     setTimeout(()=>{
       this.setState({message: ""})
     }, 3000)
-
-    if(text.length >= 1){
+    console.log(text)
+    if(text !== undefined){
       this.setState({message: text})
       return
     }
 
-    if(text.length <= 0){
+    if(text === undefined){
       this.setState({message: ""})
     }
 
