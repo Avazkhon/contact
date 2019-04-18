@@ -22,6 +22,7 @@
 1. A-z - sort contacts to alphabet
 1. star - shows stars collection contacts
 1. search - search contact to first name + last name
+1. for add in collection contact. click star in profile
   
 ### Corrects profile
 #### Main and histrory informations. For this click on the text
