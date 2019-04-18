@@ -18,11 +18,10 @@
 #### open `http://localhost:8080/`
 
 ## Functions
-+ ul 
-  + ul list contact - shows contact
-  + ul 2 A-z - sort contacts to alphabet
-  + ul star - shows stars collection contacts
-  + ul search - search contact to first name + last name
+1. list contact - shows contact
+1. A-z - sort contacts to alphabet
+1. star - shows stars collection contacts
+1. search - search contact to first name + last name
   
 ### Corrects profile
 #### Main and histrory informations. For this click on the text
