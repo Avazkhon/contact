@@ -243,7 +243,7 @@ class App extends React.Component{
         </div>
         <div className="text-center carUsers col-12" >
           <div className="cards text-center ">
-          <div className="text-center col-12" >
+          <div className="text-center col-12 messageBlock" >
             <h3 className="message "> {this.state.message}</h3>
           </div>
           {/*show arr cart users || show Profile user*/}

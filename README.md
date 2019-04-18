@@ -26,3 +26,8 @@
   
 ### Corrects profile
 #### Main and histrory informations. For this click on the text
+
+## changes
+1. Double click on the card.
+1. Hover green border.
+1. Fixing the height of the block message.

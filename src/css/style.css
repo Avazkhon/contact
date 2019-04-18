@@ -22,6 +22,16 @@ header {
 	float: left;
 }
 
+.card:hover {
+	border-color: green;
+	cursor: pointer;
+}
+
+.messageBlock {
+	height: 30px;
+	padding-bottom: 35px;
+}
+
 .message{
 	background-color: yellow;
 	border-radius: 15px; 
