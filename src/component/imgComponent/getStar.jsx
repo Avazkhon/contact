@@ -5,7 +5,7 @@ import React from 'react';
   if(boolean.boolean) {
     return (
       <div className="text-center" >
-      	<img className="btnStar" src="http://pngimg.com/uploads/star/star_PNG41518.png" alt="img-select" />
+      	<img className="btnStar" src="http://pngimg.com/uploads/star/star_PNG41518.png" alt="select" />
       </div>
     )
   }
@@ -13,7 +13,7 @@ import React from 'react';
   else{
     return (
       <div className="text-center" >
-        <img className="btnStar" src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Silver_star.png" alt="img-not-select" />
+        <img className="btnStar" src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Silver_star.png" alt="not-select" />
       </div>
     )
   }

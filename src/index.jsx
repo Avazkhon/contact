@@ -9,7 +9,7 @@ import Header from './component/Header';
 import GetUser from './xhr/getUser';
 import Card from './component/Card';
 import Profile from './component/Profile';
-import GetStart from './component/imgComponent/getStar';
+// import GetStart from './component/imgComponent/getStar';
 
 
 class App extends React.Component{
@@ -34,6 +34,8 @@ class App extends React.Component{
       profile: null,
       select: false,
       search: "",
+      cartSort: false,
+      message: ""
     }
 
   	this.handleGetUser = this.handleGetUser.bind(this);
@@ -41,12 +43,14 @@ class App extends React.Component{
     this.handleCartSort = this.handleCartSort.bind(this);
     this.handleCartSelect = this.handleCartSelect.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
+    this.addMessage = this.addMessage.bind(this);
   }
 
 
   handleGetUser () {
     let arrContacts = JSON.parse((localStorage.getItem('arrContacts')));
     if(arrContacts) {
+
       this.setState( {arrayUsers: arrContacts, profile: null});
       return
     }
@@ -105,34 +109,91 @@ class App extends React.Component{
   }
 
 
+  addMessage(text) {
+
+    setTimeout(()=>{
+      this.setState({message: ""})
+    }, 3000)
+
+    if(text.length >= 1){
+      this.setState({message: text})
+      return
+    }
+
+    if(text.length <= 0){
+      this.setState({message: ""})
+    }
+
+  }
+
+
   handleCartSort() {
-    let sortArr = this.state.arrayUsers.sort((a, b)=>{
-    let nameA = a.name,
-      nameB = b.name;
+    // if not user and profile = null
+    if(this.state.arrayUsers[0].id === null || this.state.profile !== null) {
+      this.addMessage("Please, click the button 'list contact'");
+    }
+    // sort A-z
+    if(this.state.cartSort) {
+      let sortArr = this.state.arrayUsers.sort((a, b)=>{
+      let nameA = a.name,
+          nameB = b.name;
       if(nameA < nameB) return -1
       if(nameA > nameB) return 1
       return 0
     })
 
-    this.setState({arrayUsers: sortArr})
+    this.setState({arrayUsers: sortArr, cartSort: !this.state.cartSort })
+      return
+    }
+
+    // sort z-A
+    else {
+      let sortArr = this.state.arrayUsers.sort((a, b)=>{
+      let nameA = a.name,
+          nameB = b.name;
+      if(nameA < nameB) return 1
+      if(nameA > nameB) return -1
+      return 0
+    })
+
+    this.setState({arrayUsers: sortArr, cartSort: !this.state.cartSort})
+      return
+    }
+
   }
 
 
   handleCartSelect() {
+    this.handleGetUser();
     if(this.state.select) {
-      this.handleGetUser()
       this.setState({select: !this.state.select})
     }
 
     else {
       let newArray = [];
+
       this.state.arrayUsers.map((user)=>{
         if(user.select){
           newArray.push(user)
         }
       })
-      
-      this.setState({arrayUsers: newArray, select: !this.state.select})
+
+      if(newArray.length === 0) {
+        this.setState({
+          arrayUsers: newArray,
+          select: !this.state.select})
+
+        this.addMessage("Sorry, you not select user in collection!")
+      }
+
+      else {
+        this.setState({
+          arrayUsers: newArray,
+          select: !this.state.select
+        })
+
+        this.addMessage()
+      }
     }
   }
 
@@ -181,7 +242,10 @@ class App extends React.Component{
           }} />
         </div>
         <div className="text-center carUsers col-12" >
-          <div className="cards row">
+          <div className="cards text-center ">
+          <div className="text-center col-12" >
+            <h3 className="message "> {this.state.message}</h3>
+          </div>
           {/*show arr cart users || show Profile user*/}
           {this.state.profile === null ? this.handleGetCarts() : <Profile user={this.state.profile}/> }
           </div>

@@ -35,9 +35,8 @@ class  Profile extends React.Component {
     this.setState((state) => ({
       select: !state.select
     }));
-
     this.setState((state)=>{
-      state.user.select = this.state.select;
+      state.user.select = !this.state.user.select;
       UpdateLocalStorage(state.user);
    })
  }
@@ -98,9 +97,7 @@ class  Profile extends React.Component {
     let title = event.target.title;
     let className = event.target.className[0];
 
-    this.setState({change: {className, title}})
-    console.log(this.state.change)
-  }
+    this.setState({change: {className, title}})  }
   
 
   render() {
@@ -108,46 +105,46 @@ class  Profile extends React.Component {
       <div className="container emp-profile">
         <form method="post">
           <div className="row">
-              <div className="col-md-4">
-                <div className="profile-img">
-                  <img src={this.state.user.avatar} alt={this.state.user.name} />
-                  <div className="file btn btn-lg btn-primary">
-                    Change Photo
-                    <input type="file" name="file"/>
-                  </div>
+            <div className="col-md-4">
+              <div className="profile-img">
+                <img src={this.state.user.avatar} alt={this.state.user.name} />
+                <div className="file btn btn-lg btn-primary">
+                  Change Photo
+                  <input type="file" name="file"/>
                 </div>
               </div>
-              <div className="col-md-6">
-                <div className="profile-head">
-                  <h5>
-                    {this.state.user.name}
-                  </h5>
-                  <ul className="nav nav-tabs" id="myTab" role="tablist">
-                    <li className="nav-item">
+            </div>
+            <div className="col-md-6">
+              <div className="profile-head">
+                <h5>
+                  {this.state.user.name}
+                </h5>
+                <ul className="nav nav-tabs" id="myTab" role="tablist">
+                  <li className="nav-item">
 
-                        {/*add className active if active the future*/}
-                      <button type="button" id="homeBtn" className="btn btn-light nav-link" onClick={this.hundleTable.bind(this, "main")}>main</button>
-                    </li>
-                    <li className="nav-item">
-                      <button type="button" id="homeBtn" className="btn btn-light nav-link" onClick={this.hundleTable.bind(this, "accountHistory")}>histrory</button>
-                    </li>
-                    <li className="nav-item">
-                      <button type="button" id="homeBtn" className="btn btn-light nav-link" onClick={this.hundleTable.bind(this, "adress")}>adress</button>
-                    </li>
-                    <li className="nav-item">
-                      <button type="button" id="homeBtn" className="btn btn-light nav-link" onClick={this.hundleTable.bind(this, "company")}>company</button>
-                    </li>
-                    <li className="nav-item">
-                      <button type="button" id="homeBtn" className="btn btn-light nav-link" onClick={this.hundleSelect}>
-                        <GetStar boolean={this.state.user.select} />
-                      </button>
-                    </li>
-                  </ul>
-                </div>
+                    {/*add className active if active the future*/}
+                    <button type="button" id="homeBtn" className="btn btn-light nav-link" onClick={this.hundleTable.bind(this, "main")}>main</button>
+                  </li>
+                  <li className="nav-item">
+                    <button type="button" id="homeBtn" className="btn btn-light nav-link" onClick={this.hundleTable.bind(this, "accountHistory")}>histrory</button>
+                  </li>
+                  <li className="nav-item">
+                    <button type="button" id="homeBtn" className="btn btn-light nav-link" onClick={this.hundleTable.bind(this, "adress")}>adress</button>
+                  </li>
+                  <li className="nav-item">
+                    <button type="button" id="homeBtn" className="btn btn-light nav-link" onClick={this.hundleTable.bind(this, "company")}>company</button>
+                  </li>
+                  <li className="nav-item">
+                    <button type="button" id="homeBtn" className="btn btn-light nav-link" onClick={this.hundleSelect}>
+                      <GetStar boolean={this.state.user.select} />
+                    </button>
+                  </li>
+                </ul>
               </div>
-              <div className="col-md-2">
-                  <input type="button" className="profile-print-btn" value="Print Profile" onClick={window.print}/>
-              </div>
+            </div>
+            <div className="col-md-2">
+              <input type="button" className="profile-print-btn" value="Print Profile" onClick={window.print}/>
+            </div>
           </div>
           <div className="row-4">
             <div className="col-md-4">
