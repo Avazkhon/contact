@@ -199,31 +199,21 @@ class App extends React.Component{
 
 
   handleSearch(e) {
-    let text = e.target.value;
-    this.setState({search: text})
+    let text = e.target.value.trim();
+    let arrContacts = JSON.parse((localStorage.getItem('arrContacts')));
+    let users = [];
 
-    search(text, (users)=>{
-      this.setState({arrayUsers: users})
-    })
-     // select a separate component
-    function search (text, callback) {
-      let arrContacts = JSON.parse((localStorage.getItem('arrContacts')));
-      let newArr  = [];
+    this.setState({search: text});
+    arrContacts.map((user) => {
 
-      arrContacts.map((user)=>{
+      let name = user.name.toLowerCase();
+      if(name.search(text.toLowerCase()) != -1) {
+       users.push(user)
+      }
 
-        for( let key in user ) {
-          const textSearch = String(user[key]);
-          //  search input = textSearch in arrContacts
-          if(text.toLowerCase() === textSearch.toLowerCase()) {
+    });
 
-            newArr.push(user);
-          }
-        }
-      });
-
-      callback(newArr)
-    }
+    this.setState({arrayUsers: users})
   }
 
 
